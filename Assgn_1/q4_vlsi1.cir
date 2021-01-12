@@ -1,0 +1,15 @@
+* C:\Users\SAI ASHOK\q4_vlsi1.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model nch_tt nmos
+
+
+M1 ds gs 0 0 nch_tt W=0.27u L=0.18u
+V1 ds 0 DC 1.8
+V2 gs 0 DC 0
+.dc V1 0 1.5 0.01
+.control
+run 
+plot -i(v1) vs v(ds)
+wrdata plot1.dat -i(v1) vs v(ds) 
+.endc
+.end

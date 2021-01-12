@@ -1,0 +1,38 @@
+* C:\Users\SAI ASHOK\a3_wp.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model pch_tt pmos
+.model nch_tt nmos
+V1 Vin 0 PULSE(1.8 0 0 0 0 1m 2m 0)
+M2 Vout Vin 0 0 nch_tt W=0.18u L=0.18u
+M1 Vout Vin Vdd Vdd pch_tt W=0.18u L=0.18u
+C Vout 0 10n
+V2 Vdd 0 dc 1.8V
+.control
+let lh = vector(20)
+let hl = vector(20)
+let delay = vector(20)
+let wp = vector(20)
+let loop = 0
+while loop<20
+	let loop = loop+1
+	alter @M1 W=0.18u*loop
+	tran 1u 5m
+	run
+	*plot vout
+	meas tran OP max Vout
+	meas tran IP max Vin
+	let vc = 0.5*IP
+	let vd = 0.5*OP
+	meas TRAN Tlh TRIG V(Vin) VAL=vc CROSS=1 TARG V(Vout) VAL=vd CROSS=1
+	meas TRAN Thl TRIG V(Vin) VAL=vc CROSS=2 TARG V(Vout) VAL=vd CROSS=2
+	let lh[loop-1] = Tlh
+	let hl[loop-1] = Thl
+	let delay[loop-1] = (Tlh+Thl)/2
+	let wp[loop-1] = loop*0.18u 
+	
+end
+plot lh vs wp
+wrdata fig4.dat lh vs wp
+.endc
+.end
+

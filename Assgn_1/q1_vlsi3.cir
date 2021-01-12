@@ -1,0 +1,16 @@
+* C:\Users\SAI ASHOK\q1_vlsi3.cir
+R1 Vout Vin 1000
+C1 Vout N001 0.000001
+R2 N001 0 100
+V1 Vin 0 dc 0 ac 1
+.control
+ac dec 10 0.1 1000000
+run
+*Magnitude of output on log scale
+wrdata plot1.dat db(vout/vin) xlog
+*plot db(vout/vin) xlog
+*Phase of output on log scale
+wrdata plot2.dat {180/3.14*phase(vout/vin)} xlog
+*plot {180/3.14*phase(vout/vin)} xlog
+.endc
+.end

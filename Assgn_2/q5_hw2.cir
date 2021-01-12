@@ -1,0 +1,17 @@
+* C:\Users\SAI ASHOK\hw2_vlsi_q2.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model nch_tt nmosV1
+V1 n1 0 2.5
+R1 n1 Vout 75000
+M1 Vout Vin 0 0 nch_tt W=30u L=10u 
+V2 Vin 0 dc
+.control
+dc v2 -0.01 2.6 0.01 r1 10k 100k 10k 
+run
+plot vout vs vin
+let gain = deriv(v(vout))
+let dgain = deriv(gain)
+plot gain vs vin
+wrdata plot_11.dat gain vs vin 
+.endc 
+.end

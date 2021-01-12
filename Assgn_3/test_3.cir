@@ -1,0 +1,15 @@
+* C:\Users\SAI ASHOK\a3_test_3.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model pch_tt pmos
+.model nch_tt nmos
+V1 Vin 0 PULSE(1.8 0 0 0 0 1u 2u 0)
+M2 Vout Vin 0 0 nch_tt W=0.18u L=0.18u
+M1 Vout Vin Vdd Vdd pch_tt W=1.2u L=0.18u
+V2 Vdd 0 dc 1.8V
+.control
+dc v1 0.01 1.8 0.01
+run
+meas dc vm find vout when vin=vout cross=1
+plot vout vs vin
+.endc
+.end

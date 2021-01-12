@@ -1,0 +1,30 @@
+* C:\Users\SAI ASHOK\a3_q2.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model pch_tt pmos
+.model nch_tt nmos
+M1 s1 s7 0 0 nch_tt W=0.18u L=0.18u
+M2 s2 s1 0 0 nch_tt W=0.18u L=0.18u
+M3 s3 s2 0 0 nch_tt W=0.18u L=0.18u
+M4 s4 s3 0 0 nch_tt W=0.18u L=0.18u
+M5 s5 s4 0 0 nch_tt W=0.18u L=0.18u
+M6 s6 s5 0 0 nch_tt W=0.18u L=0.18u
+M7 s7 s6 0 0 nch_tt W=0.18u L=0.18u
+M8 s1 s7 Vdd Vdd pch_tt W=1.2u L=0.18u
+M9 s2 s1 Vdd Vdd pch_tt W=1.2u L=0.18u
+M10 s3 s2 Vdd Vdd pch_tt W=1.2u L=0.18u
+M11 s4 s3 Vdd Vdd pch_tt W=1.2u L=0.18u
+M12 s5 s4 Vdd Vdd pch_tt W=1.2u L=0.18u
+M13 s6 s5 Vdd Vdd pch_tt W=1.2u L=0.18u
+M14 s7 s6 Vdd Vdd pch_tt W=1.2u L=0.18u
+V1 Vdd 0 1.8
+.control
+tran 1p 5n uic
+run
+meas TRAN T1 TRIG V(s7) VAL=1 CROSS=3 TARG V(s7) VAL=1 CROSS=5
+let f = 1/T1
+let t_p = T1/14
+print t_p
+plot s7
+wrdata fig3.dat s7
+.endc
+.end

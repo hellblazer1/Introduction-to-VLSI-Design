@@ -1,0 +1,24 @@
+* C:\Users\SAI ASHOK\hw2_vlsi_q2.cir
+.include "C:\Users\SAI ASHOK\TSMC180.lib"
+.model nch_tt nmosV1
+V1 n1 0 2.5
+R1 n1 Vout 75000
+M1 Vout Vin 0 0 nch_tt W=0.54u L=0.18u 
+V2 Vin 0 dc
+.control
+dc v2 -0.01 2.6 0.01
+run
+plot vout vs vin
+let gain = deriv(v(vout))
+let dgain = deriv(gain)
+plot gain vs vin
+meas dc vil find vin when gain=-1 cross=1
+meas dc vih find vin when gain=-1 cross=2
+meas dc voh find vout when vin=0 cross=1
+meas dc vol find vout when vin=2.5 cross=1
+meas dc vm find vout when vin=vout cross=1
+meas dc pg find gain when dgain=0 
+wrdata plot_9.dat vout vs vin
+wrdata plot_10.dat gain vs vin
+.endc 
+.end

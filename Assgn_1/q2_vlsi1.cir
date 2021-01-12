@@ -1,0 +1,14 @@
+* C:\Users\SAI ASHOK\q2_vlsi1.cir
+.model DMOD D
+D1 N002 P001 DMOD
+R1 N001 N002 2000
+V1 N001 0 2.5
+R2 P001 N003 2000
+D2 N003 0 DMOD
+.op
+.control
+run
+*display
+print i(v1)
+.endc
+.end

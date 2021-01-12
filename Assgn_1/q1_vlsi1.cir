@@ -1,0 +1,11 @@
+* C:\Users\SAI ASHOK\q1_vlsi1.cir
+R1 Vout N001 1000
+C1 Vout N002 0.000001
+R2 N002 0 100
+V1 N001 0 2.5
+*control commands
+.control
+op
+print v(vout)
+.endc
+.end

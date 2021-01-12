@@ -1,0 +1,16 @@
+* C:\Users\SAI ASHOK\q1_vlsi2.cir
+R1 Vout Vin 1000
+C1 Vout N001 0.000001
+R2 N001 0 100
+V1 Vin 0 SINE(0 1 1000000)
+*control commands
+.control
+tran 2n 0.000002
+meas TRAN TIME_1 TRIG V(Vin) VAL=0 CROSS=2 TARG V(Vin) VAL=0 CROSS=4
+meas TRAN TIME_2 TRIG V(Vin) VAL=0 CROSS=2 TARG V(Vout) VAL=0 CROSS=2
+print 360*(time_2/time_1)
+*plot vout vin
+wrdata plot1.dat V(Vout)
+wrdata plot2.dat V(Vin)
+.endc
+.end
